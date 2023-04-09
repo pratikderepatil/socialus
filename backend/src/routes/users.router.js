@@ -57,11 +57,11 @@ app.post("/login", async (req, res) => {
 // Update a user's name or bio by id.
 app.put("/:id", async (req, res) => {
 	const { name, bio } = req.body;
-	const { id } = req.params;
+	const { _id } = req.params;
 
 	try {
 		await UserModel.findByIdAndUpdate(
-			id,
+			_id,
 			{ $set: { name, bio } },
 			{ new: true }
 		);

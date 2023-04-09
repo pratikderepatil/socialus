@@ -52,10 +52,14 @@ app.post("/", async (req, res) => {
 // Update a post's content by id.
 app.put("/:id", async (req, res) => {
 	const { content } = req.body;
-	const { id } = req.params;
+	const { _id } = req.params;
 
 	try {
-		await PostModel.findByIdAndUpdate(id, { $set: { content } }, { new: true });
+		await PostModel.findByIdAndUpdate(
+			_id,
+			{ $set: { content: content } },
+			{ new: true }
+		);
 		return res.status(200).send({
 			message: "Post updated successfully!",
 		});

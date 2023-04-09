@@ -3,6 +3,7 @@ import {
   Card,
   CardBody,
   CardFooter,
+  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -49,68 +50,82 @@ const Login = () => {
         navigate('/dashboard');
       })
       .catch(err => {
-        toast({
-          title: 'Internal server error!',
-          description: 'Please try after sometime.',
-          position: 'top',
-          status: 'error',
-          duration: 5000,
-          isClosable: true,
-        });
+        if (err.response.status === 401) {
+          toast({
+            title: 'Invalid credientials',
+            description: 'Please enter valid credientials.',
+            position: 'top',
+            status: 'warning',
+            duration: 5000,
+            isClosable: true,
+          });
+          setForm(initState);
+        } else {
+          toast({
+            title: 'Internal server error!',
+            description: 'Please try after sometime.',
+            position: 'top',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
         setLoading(false);
       });
   };
   return (
-    <Card padding={5} w={['full', '70%', '50%', '35%', '30%']}>
-      <CardBody>
-        <VStack gap={3}>
-          <FormControl isRequired>
-            <FormLabel>Email </FormLabel>
-            <Input
-              required
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleInput}
-            />
-
-            <FormLabel>Password </FormLabel>
-            <InputGroup size="md">
+    <Flex minH="80vh" w="full" justifyContent={'center'} alignItems={'center'}>
+      <Card padding={5} h="auto" w={['full', '70%', '50%', '35%', '30%']}>
+        <CardBody>
+          <VStack gap={3}>
+            <FormControl isRequired>
+              <FormLabel>Email </FormLabel>
               <Input
-                pr="4.5rem"
-                name="password"
-                type={show ? 'text' : 'password'}
-                value={form.password}
+                required
+                type="email"
+                name="email"
+                value={form.email}
                 onChange={handleInput}
               />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleClick}>
-                  {show ? 'Hide' : 'Show'}
+
+              <FormLabel>Password </FormLabel>
+              <InputGroup size="md">
+                <Input
+                  pr="4.5rem"
+                  name="password"
+                  type={show ? 'text' : 'password'}
+                  value={form.password}
+                  onChange={handleInput}
+                />
+                <InputRightElement width="4.5rem">
+                  <Button h="1.75rem" size="sm" onClick={handleClick}>
+                    {show ? 'Hide' : 'Show'}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <Text fontSize={'md'}>
+              Dont have an Account?{' '}
+              <Link to="/register">
+                <Button variant={'link'} colorScheme="messenger">
+                  Register
                 </Button>
-              </InputRightElement>
-            </InputGroup>
-          </FormControl>
-          <Text fontSize={'md'}>
-            Dont have an Account?{' '}
-            <Link to="/register">
-              <Button variant={'link'} colorScheme="messenger">
-                Register
-              </Button>
-            </Link>
-          </Text>
-        </VStack>
-      </CardBody>
-      <CardFooter>
-        <Button
-          w="full"
-          onClick={handleSubmit}
-          colorScheme={'messenger'}
-          isLoading={loading}
-        >
-          Signup
-        </Button>
-      </CardFooter>
-    </Card>
+              </Link>
+            </Text>
+          </VStack>
+        </CardBody>
+        <CardFooter>
+          <Button
+            w="full"
+            onClick={handleSubmit}
+            colorScheme={'messenger'}
+            isLoading={loading}
+          >
+            Signup
+          </Button>
+        </CardFooter>
+      </Card>
+    </Flex>
   );
 };
 
