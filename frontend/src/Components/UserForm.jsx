@@ -3,6 +3,7 @@ import {
   Card,
   CardBody,
   CardFooter,
+  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -74,77 +75,79 @@ const UserForm = () => {
       });
   };
   return (
-    <Card padding={5} w={['full', '70%', '50%', '35%', '30%']}>
-      <CardBody>
-        <VStack gap={3}>
-          <FormControl isRequired>
-            <FormLabel>Name </FormLabel>
-            <Input
-              required
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleInput}
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Email </FormLabel>
-            <Input
-              required
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleInput}
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Password </FormLabel>
-            <InputGroup size="md">
+    <Flex minH="80vh" w="full" justifyContent={'center'} alignItems={'center'}>
+      <Card padding={5} w={['full', '70%', '50%', '35%', '30%']}>
+        <CardBody>
+          <VStack gap={3}>
+            <FormControl isRequired>
+              <FormLabel>Name </FormLabel>
               <Input
-                pr="4.5rem"
-                name="password"
-                type={show ? 'text' : 'password'}
-                value={form.password}
+                required
+                type="text"
+                name="name"
+                value={form.name}
                 onChange={handleInput}
               />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleClick}>
-                  {show ? 'Hide' : 'Show'}
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Email </FormLabel>
+              <Input
+                required
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleInput}
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Password </FormLabel>
+              <InputGroup size="md">
+                <Input
+                  pr="4.5rem"
+                  name="password"
+                  type={show ? 'text' : 'password'}
+                  value={form.password}
+                  onChange={handleInput}
+                />
+                <InputRightElement width="4.5rem">
+                  <Button h="1.75rem" size="sm" onClick={handleClick}>
+                    {show ? 'Hide' : 'Show'}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Bio </FormLabel>
+              <Input
+                required
+                type="text"
+                name="bio"
+                value={form.bio}
+                onChange={handleInput}
+              />
+            </FormControl>
+            <Text fontSize={'md'}>
+              Already have an Account{' '}
+              <Link to="/login">
+                <Button variant={'link'} colorScheme="messenger">
+                  Login
                 </Button>
-              </InputRightElement>
-            </InputGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Bio </FormLabel>
-            <Input
-              required
-              type="text"
-              name="bio"
-              value={form.bio}
-              onChange={handleInput}
-            />
-          </FormControl>
-          <Text fontSize={'md'}>
-            Already have an Account{' '}
-            <Link to="/login">
-              <Button variant={'link'} colorScheme="messenger">
-                Login
-              </Button>
-            </Link>
-          </Text>
-        </VStack>
-      </CardBody>
-      <CardFooter>
-        <Button
-          w="full"
-          onClick={handleSubmit}
-          colorScheme={'messenger'}
-          isLoading={loading}
-        >
-          Register
-        </Button>
-      </CardFooter>
-    </Card>
+              </Link>
+            </Text>
+          </VStack>
+        </CardBody>
+        <CardFooter>
+          <Button
+            w="full"
+            onClick={handleSubmit}
+            colorScheme={'messenger'}
+            isLoading={loading}
+          >
+            Register
+          </Button>
+        </CardFooter>
+      </Card>
+    </Flex>
   );
 };
 

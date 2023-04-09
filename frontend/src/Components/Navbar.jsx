@@ -10,7 +10,11 @@ const Navbar = () => {
       pl={['5', '10']}
       pr={['5', '10']}
     >
-      <Text fontFamily={'cursive'} fontWeight={'bold'}>
+      <Text
+        fontFamily={'cursive'}
+        fontWeight={'bold'}
+        fontSize={['lg', '2xl', '3xl']}
+      >
         Social Us
       </Text>
       <ColorModeSwitcher justifySelf="flex-end" />
