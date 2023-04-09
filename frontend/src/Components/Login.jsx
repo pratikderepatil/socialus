@@ -12,16 +12,15 @@ import {
   VStack,
   useToast,
 } from '@chakra-ui/react';
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 const initState = {
   email: '',
   password: '',
-  name: '',
-  bio: '',
 };
-const UserForm = () => {
+const Login = () => {
   const [form, setForm] = useState(initState);
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,42 +33,30 @@ const UserForm = () => {
   };
   const handleSubmit = () => {
     setLoading(true);
-    console.log(form);
     axios
-      .post(`${process.env.REACT_APP_API_URL}users`, { ...form })
+      .post(`${process.env.REACT_APP_API_URL}users/login`, { ...form })
       .then(res => {
+        localStorage.setItem('User', JSON.stringify({ ...res.data }));
         toast({
-          title: 'Account created successfully!',
+          title: 'Login Success!',
           description: "It's a start of something amazing.",
           position: 'top',
           status: 'success',
           duration: 5000,
           isClosable: true,
         });
-        console.log(res);
         setLoading(false);
-        navigate('/login');
+        navigate('/dashboard');
       })
       .catch(err => {
-        if (err.response.status === 409) {
-          toast({
-            title: 'This email is already in use.',
-            description: 'Please try with new email.',
-            position: 'top',
-            status: 'warning',
-            duration: 5000,
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: 'Internal server error!',
-            description: 'Please try after sometime.',
-            position: 'top',
-            status: 'error',
-            duration: 5000,
-            isClosable: true,
-          });
-        }
+        toast({
+          title: 'Internal server error!',
+          description: 'Please try after sometime.',
+          position: 'top',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
         setLoading(false);
       });
   };
@@ -77,16 +64,6 @@ const UserForm = () => {
     <Card padding={5} w={['full', '70%', '50%', '35%', '30%']}>
       <CardBody>
         <VStack gap={3}>
-          <FormControl isRequired>
-            <FormLabel>Name </FormLabel>
-            <Input
-              required
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleInput}
-            />
-          </FormControl>
           <FormControl isRequired>
             <FormLabel>Email </FormLabel>
             <Input
@@ -96,8 +73,7 @@ const UserForm = () => {
               value={form.email}
               onChange={handleInput}
             />
-          </FormControl>
-          <FormControl isRequired>
+
             <FormLabel>Password </FormLabel>
             <InputGroup size="md">
               <Input
@@ -114,21 +90,11 @@ const UserForm = () => {
               </InputRightElement>
             </InputGroup>
           </FormControl>
-          <FormControl>
-            <FormLabel>Bio </FormLabel>
-            <Input
-              required
-              type="text"
-              name="bio"
-              value={form.bio}
-              onChange={handleInput}
-            />
-          </FormControl>
           <Text fontSize={'md'}>
-            Already have an Account{' '}
-            <Link to="/login">
+            Dont have an Account?{' '}
+            <Link to="/register">
               <Button variant={'link'} colorScheme="messenger">
-                Login
+                Register
               </Button>
             </Link>
           </Text>
@@ -141,11 +107,11 @@ const UserForm = () => {
           colorScheme={'messenger'}
           isLoading={loading}
         >
-          Register
+          Signup
         </Button>
       </CardFooter>
     </Card>
   );
 };
 
-export default UserForm;
+export default Login;
