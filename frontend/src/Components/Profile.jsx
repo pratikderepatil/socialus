@@ -1,4 +1,4 @@
-import { Avatar, Card, CardBody, Heading, Text } from '@chakra-ui/react';
+import { Avatar, Card, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 const Profile = () => {
@@ -22,6 +22,7 @@ const Profile = () => {
         </Heading>
         <Text fontSize={['sm', 'lg', 'xl', '2xl']}>{details.bio}</Text>
       </CardBody>
+	  <CardFooter></CardFooter>
     </Card>
   );
 };
