@@ -52,11 +52,11 @@ app.post("/", async (req, res) => {
 // Update a post's content by id.
 app.put("/:id", async (req, res) => {
 	const { content } = req.body;
-	const { _id } = req.params;
+	const { id } = req.params;
 
 	try {
 		await PostModel.findByIdAndUpdate(
-			_id,
+			id,
 			{ $set: { content: content } },
 			{ new: true }
 		);
