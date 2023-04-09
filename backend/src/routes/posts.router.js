@@ -16,6 +16,15 @@ app.get("/:id", async (req, res) => {
 		return res.status(400).send(e);
 	}
 });
+// Retrieve all posts
+app.get("/", async (req, res) => {
+	try {
+		const post = await PostModel.aggregate([{ $sort: { timestamps: 1 } }]);
+		return res.status(201).send(post);
+	} catch (e) {
+		return res.status(400).send(e);
+	}
+});
 
 // Create a new post.
 app.post("/", async (req, res) => {

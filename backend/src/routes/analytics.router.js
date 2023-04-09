@@ -20,6 +20,28 @@ app.get("/users", async (req, res) => {
 // Retrieve the top 5 most active users, based on the number of posts
 app.get("/users/top-active", async (req, res) => {
 	try {
+		// db.zips.aggregate([
+		// 	{ $group: { _id: "$state", total: { $sum: "$pop" } } },
+		// 	{ $sort: { total: 1 } },
+		// ]);
+
+		const topActive = await PostModel.aggregate([
+			{
+				$group: { _id: "$user_id", count: { $count: {} } },
+			},
+			{ $sort: { count: -1 } },
+			{ $limit: 5 },
+			{
+				$lookup: {
+					from: "users",
+					localField: "_id",
+					foreignField: "_id",
+					as: "user",
+				},
+			},
+		]);
+
+		return res.status(201).send(topActive);
 	} catch (e) {
 		return res.status(400).send(e);
 	}
