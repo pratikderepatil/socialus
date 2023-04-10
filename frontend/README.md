@@ -1,68 +1,81 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Social us
 
-## Available Scripts
+Social us is a simple and efficient social media platform that provides users with a satisfying user experience. By implementing the necessary features such as user profiles, posts, likes, and analytics, the platform will offer users a powerful tool for socializing and sharing their thoughts and ideas.
 
-In the project directory, you can run:
+UI will be responsible for providing users with an interface to interact with the platform. It will provide screens and components that allow users to create and view user profiles and posts, as well as like and unlike posts. The UI should be intuitive, user-friendly, and visually appealing.
 
-### `npm start`
+## Demo
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Frontend Deployed link: https://socialus.vercel.app/
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Backend Deployed link: https://social-us.onrender.com
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Client:** React, Chakra-UI
 
-### `npm run build`
+**Server:** Node, Express, Mongoose, MongoDB
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- Light/dark mode toggle
+- Fullscreen mode
+- Cross platform
+- User analytics
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Run Locally
 
-### `npm run eject`
+Clone the project
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+  git clone https://github.com/pratikderepatil/socialus
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Go to the project directory
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+  cd frontend
+  cd backend
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Start the server
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+  npm run start
+```
 
-### Code Splitting
+## Environment Variables
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+To run this project, you will need to add the following environment variables to your .env file
 
-### Analyzing the Bundle Size
+### Frontend
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+`REACT_APP_API_URL="https://social-us.onrender.com"`
 
-### Making a Progressive Web App
+## Screenshots
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+![Screenshot (866)](https://user-images.githubusercontent.com/103197193/230828450-83ff780e-278c-4f2f-a014-2028713e89a0.png)
 
-### Advanced Configuration
+![Screenshot (865)](https://user-images.githubusercontent.com/103197193/230828477-89bb16b9-a28d-47d5-b1f5-38487be76c54.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+![Screenshot (867)](https://user-images.githubusercontent.com/103197193/230828455-74e7aa4f-36c7-41a4-9d5a-dc1b26ef705e.png)
 
-### Deployment
+![Screenshot (868)](https://user-images.githubusercontent.com/103197193/230828459-d48685c8-24ce-4c2b-b5d9-f563325cd8b7.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+![Screenshot (869)](https://user-images.githubusercontent.com/103197193/230828464-654a0f7b-f552-4a6f-b1df-a6f0af51481e.png)
 
-### `npm run build` fails to minify
+![Screenshot (870)](https://user-images.githubusercontent.com/103197193/230828468-6621ae7f-6f7e-4105-8daf-3435d29ad1e9.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![Screenshot (871)](https://user-images.githubusercontent.com/103197193/230828472-b6200bde-1202-4c16-951e-efa68483c5c2.png)
+
+![Screenshot (872)](https://user-images.githubusercontent.com/103197193/230828474-d9e18938-5ed9-4f30-810c-7fc6e38a0822.png)
+
+## Authors
+
+- [@pratikderepatil](https://www.github.com/pratikderepatil)
