@@ -47,7 +47,7 @@ const Login = () => {
           isClosable: true,
         });
         setLoading(false);
-        navigate('/dashboard');
+        window.location.href = '/dashboard';
       })
       .catch(err => {
         if (err.response.status === 401) {
