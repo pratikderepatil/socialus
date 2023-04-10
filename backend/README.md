@@ -64,7 +64,8 @@ To run this project, you will need to add the following environment variables to
 
 download the file and save as .JSON format and import to postman.
 
-[Social us.postman_collection.txt](https://github.com/pratikderepatil/socialus/files/11187791/Social.us.postman_collection.txt)
+[Social us.postman_collection.txt](https://github.com/pratikderepatil/socialus/files/11188194/Social.us.postman_collection.txt)
+
 
 ## Authors
 
