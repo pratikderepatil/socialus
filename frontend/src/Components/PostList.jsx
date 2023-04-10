@@ -120,7 +120,6 @@ const PostList = () => {
     <Flex flexDirection={'column'} gap="5">
       <PostForm handlePost={handlePost} />
       {posts?.map(ele => {
-        console.log(ele);
         return (
           <Card key={ele._id} p={['2', '5']}>
             <CardHeader>

@@ -37,7 +37,6 @@ const Profile = () => {
       .get(`${process.env.REACT_APP_API_URL}users/${user.id}`)
       .then(res => {
         setDetails(res.data);
-        console.log(res.data);
       })
       .catch(err => console.log(err));
   };
@@ -79,7 +78,6 @@ const Profile = () => {
         bio: updateBio,
       })
       .then(res => {
-        console.log(res);
         onClose();
       })
       .catch(err => console.log(err))

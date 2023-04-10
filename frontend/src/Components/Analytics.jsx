@@ -33,7 +33,6 @@ const Analytics = () => {
       .get(`${process.env.REACT_APP_API_URL}analytics/users/top-active`)
       .then(res => {
         setTopUser(res.data);
-        console.log(res.data);
       })
       .catch(err => console.log(err));
   };
