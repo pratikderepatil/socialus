@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardBody,
+  CardHeader,
   Flex,
   Heading,
   Tab,
@@ -20,6 +21,8 @@ import { IoIosArrowBack } from 'react-icons/io';
 const Analytics = () => {
   const [userCount, setUserCount] = useState(0);
   const [topUser, setTopUser] = useState([]);
+  const [postCount, setPostCount] = useState(0);
+  const [topPost, setTopPost] = useState([]);
   const getUserCount = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}analytics/users`)
@@ -36,9 +39,29 @@ const Analytics = () => {
       })
       .catch(err => console.log(err));
   };
+  const getPostCount = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}analytics/posts`)
+      .then(res => {
+        console.log(res);
+        setPostCount(res.data.count);
+      })
+      .catch(err => console.log(err));
+  };
+  const getTopPost = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}analytics/posts/top-active`)
+      .then(res => {
+        console.log(res);
+        setTopPost(res.data);
+      })
+      .catch(err => console.log(err));
+  };
   useEffect(() => {
     getUserCount();
     getTopUser();
+    getPostCount();
+    getTopPost();
   }, []);
   return (
     <>
@@ -100,9 +123,43 @@ const Analytics = () => {
             </Flex>
           </TabPanel>
           <TabPanel>
-            <Heading textAlign={'left'} fontSize={['lg', '2xl']}>
-              Total Posts:{' '}
+            <Heading textAlign={'left'} mb="5" fontSize={['lg', '2xl']}>
+              Total Posts: {postCount}
             </Heading>
+            <Heading textAlign={'left'} fontSize={['lg', '2xl']}>
+              Top 5 most active users:
+            </Heading>
+            <Flex
+              mt="5"
+              wrap={'wrap'}
+              gap="5"
+              alignItems={'center'}
+              h="auto"
+              justifyContent={'center'}
+            >
+              {topPost?.map(ele => {
+                return (
+                  <Card key={ele._id} p={['2', '5']}>
+                    <CardHeader>
+                      <Flex gap="5" pl={['3', '10']} alignItems={'center'}>
+                        <Avatar name={ele.user[0]?.name} size={['sm', 'lg']} />
+                        <Heading mb="5" mt="5" fontSize={['mg', 'lg', 'xl']}>
+                          {ele.user[0]?.name}
+                        </Heading>
+                      </Flex>
+                    </CardHeader>
+                    <CardBody>
+                      <Text fontSize={['lg', 'xl', '2xl']} mb="2">
+                        {ele.content}
+                      </Text>
+                      <Text textAlign={'left'} fontSize={['sm', 'md', 'lg']}>
+                        likes: {ele.likes}
+                      </Text>
+                    </CardBody>
+                  </Card>
+                );
+              })}
+            </Flex>
           </TabPanel>
         </TabPanels>
       </Tabs>
