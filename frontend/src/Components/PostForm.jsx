@@ -38,6 +38,7 @@ const PostForm = ({ handlePost }) => {
             handlePost(content);
             setContent('');
           }}
+          colorScheme="messenger"
         >
           Create Post
         </Button>

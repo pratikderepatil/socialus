@@ -76,7 +76,7 @@ const UserForm = () => {
   };
   return (
     <Flex minH="80vh" w="full" justifyContent={'center'} alignItems={'center'}>
-      <Card padding={5} w={['full', '70%', '50%', '35%', '30%']}>
+      <Card padding={5} w={['full', '70vw', '50vw', '40vw', '30vw']}>
         <CardBody>
           <VStack gap={3}>
             <FormControl isRequired>
