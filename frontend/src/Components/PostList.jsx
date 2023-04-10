@@ -17,17 +17,23 @@ import {
   Text,
   Textarea,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { BiLike, BiDislike, BiEditAlt } from 'react-icons/bi';
+import { AiOutlineDelete } from 'react-icons/ai';
 import React, { useEffect, useState } from 'react';
 import PostForm from './PostForm';
+import { useNavigate } from 'react-router-dom';
 
 const PostList = () => {
   const user = JSON.parse(localStorage.getItem('User')) || '';
   const [updateContent, setUpdateContent] = useState('');
   const [posts, setPosts] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+  const navigate = useNavigate();
+
   const handlePost = content => {
     axios
       .post(`${process.env.REACT_APP_API_URL}posts`, {
@@ -81,6 +87,31 @@ const PostList = () => {
       })
       .catch(err => console.log(err));
   };
+
+  const handlePostDelete = id => {
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}posts/${id}`)
+      .then(res => {
+        toast({
+          title: 'Post deleted successfully!',
+          position: 'top',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+        getPosts();
+      })
+      .catch(err => {
+        toast({
+          title: 'Internal server error!',
+          description: 'Please try after sometime.',
+          position: 'top',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+      });
+  };
   useEffect(() => {
     getPosts();
   }, []);
@@ -89,13 +120,14 @@ const PostList = () => {
     <Flex flexDirection={'column'} gap="5">
       <PostForm handlePost={handlePost} />
       {posts?.map(ele => {
+        console.log(ele);
         return (
           <Card key={ele._id} p={['2', '5']}>
             <CardHeader>
               <Flex gap="5" pl={['3', '10']} alignItems={'center'}>
-                <Avatar name={ele.user[0].name} size={['sm', 'lg']} />
+                <Avatar name={ele.user[0]?.name} size={['sm', 'lg']} />
                 <Heading mb="5" mt="5" fontSize={['mg', 'lg', 'xl']}>
-                  {ele.user[0].name}
+                  {ele.user[0]?.name}
                 </Heading>
               </Flex>
             </CardHeader>
@@ -107,7 +139,7 @@ const PostList = () => {
                 likes: {ele.likes}
               </Text>
             </CardBody>
-            <CardFooter justify="space-between" flexWrap="wrap">
+            <CardFooter justify="space-between">
               {ele.likedBy.includes(user.id) ? (
                 <Button
                   flex="1"
@@ -132,17 +164,30 @@ const PostList = () => {
                 </Button>
               )}
               {ele.user_id === user.id ? (
-                <Button
-                  flex="1"
-                  variant="ghost"
-                  leftIcon={<BiEditAlt />}
-                  onClick={() => {
-                    onOpen();
-                    setUpdateContent(ele.content);
-                  }}
-                >
-                  Edit
-                </Button>
+                <>
+                  <Button
+                    flex="1"
+                    variant="ghost"
+                    leftIcon={<BiEditAlt />}
+                    onClick={() => {
+                      onOpen();
+                      setUpdateContent(ele.content);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    flex="1"
+                    variant="ghost"
+                    colorScheme="red"
+                    onClick={() => {
+                      handlePostDelete(ele._id);
+                    }}
+                    leftIcon={<AiOutlineDelete />}
+                  >
+                    Delete
+                  </Button>
+                </>
               ) : (
                 <></>
               )}
