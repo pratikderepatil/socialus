@@ -47,4 +47,28 @@ app.get("/users/top-active", async (req, res) => {
 	}
 });
 
+// Retrieve the total number of posts.
+app.get("/posts", async (req, res) => {
+	try {
+		const count = await PostModel.countDocuments();
+		return res.status(201).send({ count });
+	} catch (e) {
+		return res.status(400).send(e);
+	}
+});
+
+// Retrieve the top 5 most active posts, based on the number of posts
+app.get("/posts/top-active", async (req, res) => {
+	try {
+		const topActive = await PostModel.aggregate([
+			{ $sort: { likes: -1 } },
+			{ $limit: 5 },
+		]);
+
+		return res.status(201).send(topActive);
+	} catch (e) {
+		return res.status(400).send(e);
+	}
+});
+
 module.exports = app;
